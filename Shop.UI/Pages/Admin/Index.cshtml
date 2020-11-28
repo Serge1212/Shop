@@ -7,8 +7,10 @@
     <button v-on:click="getProducts">Get Products</button>
 
     <div>
-        <p v-for="product in products">
+        <p v-for="(product, index) in products">
             {{product.id}} - {{product.name}} - {{product.description}} - {{product.value}}
+            <a @@click="editProduct(product, index)">Edit</a>
+            <a @@click="removeProduct(product.id, index)">Remove</a>
         </p>
     </div>
 
@@ -16,7 +18,8 @@
         <input v-model="productModel.name"/>
         <input v-model="productModel.description"/>
         <input v-model.number="productModel.value"/>
-        <button @@click="createProduct">Create Product</button>
+        <button @@click="createProduct" v-if="!productModel.id">Create Product</button>
+        <button @@click="updateProduct" v-else>Update Product</button>
     </div>
 </div>
   
